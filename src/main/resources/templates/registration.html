@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link href="../static/css/style.css" th:href="@{/css/style.css}"
+	rel="stylesheet" />
+</head>
+<body>
+	<link
+		href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+		rel="stylesheet" id="bootstrap-css">
+	<script
+		src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script
+		src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script src='https://www.google.com/recaptcha/api.js'></script>
+	<script src="validator.js"></script>
+	<script src="contact.js"></script>
+	<!------ Include the above in your HEAD tag ---------->
+
+	<div class="wrapper fadeInDown">
+		<div id="formContent">
+			<!-- Tabs Titles -->
+
+			<!-- Icon -->
+			<div class="fadeIn first">
+				<img src="https://i.ibb.co/VqX8KdJ/logo2.jpg" id="icon"
+					alt="User Icon" />
+			</div>
+
+			<!-- Login Form -->
+			<form>
+				<input type="text" id="username" class="fadeIn second" name="usuario"
+					placeholder="user name"> 
+				<input type="text" id="password"
+					class="fadeIn third" name="login" placeholder="password"> 
+				<input
+					type="text" id="email" class="fadeIn fourth" name="email"
+					placeholder="email"> 
+				<input type="text"
+					class="fadeIn fifth" value="Log In">
+				<div class="g-recaptcha"
+					data-sitekey="6LfKURIUAAAAAO50vlwWZkyK_G2ywqE52NU7YO0S"
+					data-callback="verifyRecaptchaCallback"
+					data-expired-callback="expiredRecaptchaCallback"></div>
+				<input class="form-control d-none" data-recaptcha="true" required
+					data-error="Please complete the Captcha">
+				<div class="help-block with-errors"></div>
+			</form>
+
+			<!-- Remind Passowrd -->
+			<div id="formFooter">
+      			<input type="submit" class="fadeIn fourth" value="Register">
+			</div>
+
+		</div>
+	</div>
+</body>
+</html>
