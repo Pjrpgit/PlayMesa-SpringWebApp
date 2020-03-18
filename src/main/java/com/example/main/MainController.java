@@ -25,5 +25,9 @@ public class MainController {
 		return "registration"; //si retorno ":redirect" me envia a este metodo
 		
 	}
+	@GetMapping("/juego")
+	public String detalleJuego() {
+		return "juegodetalle";
+	}
 	
 }
