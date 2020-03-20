@@ -13,13 +13,13 @@ import com.example.modelo.Juego;
 public interface JuegoRepository extends JpaRepository<Juego, Integer> {
 	
 	
-	@Query("select p.id from Producto p")
+	@Query("select p.juegoId from Juego p")
 	public List<Integer> obtenerIds();
 	
-	@Query("select p from Producto p where p.categoria.id = ?1")
+	@Query("select p from Juego p where p.categoria.categoriaId = ?1")
 	public List<Juego> findByCategoriaId(Integer categoriaId);
 	
-	@Query("select count(p) from Producto p where p.categoria = ?1")
+	@Query("select count(p) from Juego p where p.categoria = ?1")
 	public int findNumProductosByCategoria(Categoria categoria);
 
 	public List<Juego> findByCategoria(Categoria categoria);

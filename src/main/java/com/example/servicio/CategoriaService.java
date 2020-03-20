@@ -19,9 +19,9 @@ public class CategoriaService {
 		return repositorio.findAll();
 	}	
 	
-	public List<Categoria> findDestacadas() {
-		return repositorio.findDestacadas();
-	}
+//	public List<Categoria> findDestacadas() {
+//		return repositorio.findDestacadas();
+//	}
 	
 	public Categoria save(Categoria categoria) {
 		return repositorio.save(categoria);

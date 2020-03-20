@@ -13,6 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.URL;
 
 /**
  *
@@ -34,8 +37,10 @@ public class Habilidad implements Serializable {
     @Column(name = "habilidad_id")
     private Integer habilidadId;
     @Basic(optional = false)
+    @NotEmpty
     private String nombre;
     private String descripcion;
+    @URL
     private String imagen;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "habilidadId")
     private List<JuegoHabilidad> juegoHabilidadList;

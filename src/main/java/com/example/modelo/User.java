@@ -1,6 +1,9 @@
 package com.example.modelo;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+
 import java.util.Set;
 
 @Entity
@@ -9,10 +12,16 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    
+    @NotEmpty
     private String username;
-
+    
+    @NotEmpty
     private String password;
+    
+    @NotEmpty
+    @Email
+    private String email;
 
     @Transient
     private String passwordConfirm;

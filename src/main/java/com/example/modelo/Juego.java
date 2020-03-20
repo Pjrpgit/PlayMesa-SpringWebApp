@@ -15,6 +15,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+
+import org.hibernate.validator.constraints.URL;
 
 /**
  *
@@ -50,12 +54,18 @@ public class Juego implements Serializable {
     private String nombre;
     private String autor;
     @Column(name = "numero_jugadores")
+    @Min(1)
+    @Max(99)
     private Integer numeroJugadores;
     private String complejidad;
+    @Min(0)
+    @Max(999)
     private Integer duracion;
     private String tematica;
     private Short cooperativo;
     @Column(name = "edad_recomendada")
+    @Min(0)
+    @Max(99)
     private Integer edadRecomendada;
     @Column(name = "tiene_cartas")
     private Short tieneCartas;
@@ -65,6 +75,7 @@ public class Juego implements Serializable {
     private Short tieneMiniaturas;
     @Column(name = "tiene_dados")
     private Short tieneDados;
+    @URL
     private String portada;
     @Column(name = "tam_tablero")
     private String tamTablero;

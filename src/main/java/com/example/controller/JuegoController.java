@@ -17,7 +17,7 @@ import com.example.servicio.JuegoService;
 
 
 @Controller
-@RequestMapping("/admin/producto")
+@RequestMapping("/admin/juego")
 public class JuegoController {
 
 	@Autowired
@@ -28,48 +28,48 @@ public class JuegoController {
 
 	@GetMapping("/")
 	public String index(Model model) {
-		model.addAttribute("productos", juegoService.findAll());
-		return "admin/list-producto";
+		model.addAttribute("juegos", juegoService.findAll());
+		return "admin/list-juego";
 	}
 
 	@GetMapping("/nuevo")
-	public String nuevaProducto(Model model) {
-		model.addAttribute("producto", new Juego());
+	public String nuevoJuego(Model model) {
+		model.addAttribute("juego", new Juego());
 		model.addAttribute("categorias", categoriaService.findAll());
-		return "admin/form-producto";
+		return "admin/form-juego";
 	}
 
 	@PostMapping("/nuevo/submit")
-	public String submitNuevoProducto(@Valid Juego juego, BindingResult bindingResult, Model model) {
+	public String submitNuevoJuego(@Valid Juego juego, BindingResult bindingResult, Model model) {
 
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("categorias", categoriaService.findAll());
-			return "admin/form-producto";
+			return "admin/form-juego";
 		} else {
 			juegoService.save(juego);
-			return "redirect:/admin/producto/";
+			return "redirect:/admin/juego/";
 
 		}
 
 	}
 
 	@GetMapping("/editar/{id}")
-	public String editarProducto(@PathVariable("id") Integer id, Model model) {
+	public String editarJuego(@PathVariable("id") Integer id, Model model) {
 
-		Juego producto = juegoService.findById(id);
+		Juego juego = juegoService.findById(id);
 
-		if (producto != null) {
-			model.addAttribute("producto", producto);
+		if (juego != null) {
+			model.addAttribute("juego", juego);
 			model.addAttribute("categorias", categoriaService.findAll());
-			return "admin/form-producto";
+			return "admin/form-juego";
 		} else {
-			return "redirect:/admin/producto/";
+			return "redirect:/admin/juego/";
 		}
 
 	}
 
 	@GetMapping("/borrar/{id}")
-	public String borrarProducto(@PathVariable("id") Integer id, Model model) {
+	public String borrarJuego(@PathVariable("id") Integer id, Model model) {
 
 		Juego juego = juegoService.findById(id);
 
@@ -77,7 +77,7 @@ public class JuegoController {
 			juegoService.delete(juego);
 		}
 
-		return "redirect:/admin/producto/";
+		return "redirect:/admin/juego/";
 
 	}
 

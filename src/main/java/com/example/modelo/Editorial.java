@@ -12,6 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.URL;
 
 /**
  *
@@ -34,9 +37,11 @@ public class Editorial implements Serializable {
     @Column(name = "editorial_id")
     private Integer editorialId;
     @Basic(optional = false)
+    @NotEmpty
     private String nombre;
     private String descripcion;
     private String url;
+    @URL
     private String imagen;
     @OneToMany(mappedBy = "editorialId")
     private List<Juego> juegoList;
