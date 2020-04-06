@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.auth.repository.RoleRepository;
 import com.example.auth.repository.UserRepository;
 import com.example.modelo.Role;
 import com.example.modelo.User;
@@ -22,12 +23,17 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 	
     @Autowired
     private UserRepository userRepository;
+    
+    @Autowired
+    private RoleRepository roleRepository;
 
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) {
         User user = userRepository.findByUsername(username);
-        if (user == null) throw new UsernameNotFoundException(username);
+        if (user == null) {
+        	throw new UsernameNotFoundException(username);
+        }
 
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         for (Role role : user.getRoles()){

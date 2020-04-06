@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 /**
  *
@@ -38,8 +40,16 @@ public class JuegoHabilidad implements Serializable {
     @JoinColumn(name = "juego_id", referencedColumnName = "juego_id")
     @ManyToOne(optional = false)
     private Juego juegoId;
+    @Column(name= "relacion_nivel")
+	@Min(0)
+	@Max(5)
+    private float nivel;
 
     public JuegoHabilidad() {
+    }
+    
+    public JuegoHabilidad(Juego juegoId) {
+    	this.setJuegoId(juegoId);
     }
 
     public JuegoHabilidad(Integer relacionId) {
@@ -78,7 +88,15 @@ public class JuegoHabilidad implements Serializable {
         this.juegoId = juegoId;
     }
 
-    @Override
+    public float getNivel() {
+		return nivel;
+	}
+
+	public void setNivel(float nivel) {
+		this.nivel = nivel;
+	}
+
+	@Override
     public int hashCode() {
         int hash = 0;
         hash += (relacionId != null ? relacionId.hashCode() : 0);

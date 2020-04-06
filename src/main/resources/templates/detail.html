@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title th:text=${juego.nombre}/>
+<link href="../static/css/detail.css" th:href="@{/css/detail.css}"
+	rel="stylesheet" />
+</head>
+<body>
+	<div class="container">
+		<div class="front side">
+			<div class="content">
+				<h1 class="juego-name" th:text=${juego.nombre}>Nombre del juego</h1>
+				<img src="http://placehold.it/" alt=""
+					th:src="${#strings.isEmpty(juego.portada)} ? 'http://placehold.it/350x260' : ${juego.portada}"
+					class="img" />
+			</div>
+		</div>
+		<div class="back side">
+			<h1 class="title-caracteristicas">Caracteristicas</h1>
+			<div class="lado-izq">
+				<table class="unstyledTable">
+					<tbody>
+						<tr>
+							<td class="td-nombre">Autor</td>
+							<td><p th:text=${juego.autor}/></td>
+						</tr>
+						<tr>
+							<td class="td-nombre">Numero Maximo de Jugadores</td>
+							<td><p th:text=${juego.numeroJugadores}/></td>
+						</tr>
+						<tr>
+							<td class="td-nombre">Nivel de Complejidad</td>
+							<td><p th:text=${juego.complejidad}/></td>
+						</tr>
+						<tr>
+							<td class="td-nombre">Duracion Maxima Aproximada</td>
+							<td><p th:text=${juego.duracion}/>mins</td>
+						</tr>
+						<tr>
+							<td class="td-nombre">Tematica</td>
+							<td><p th:text=${juego.tematica}/></td>
+						</tr>
+						<tr>
+							<td class="td-nombre">¿Cooperativo?</td>
+							<td>
+								<p th:if="${juego.cooperativo == false}"><img src="https://i.ibb.co/DfvFvKz/circle-cropped-2.png" style="width: 10%; height: 10%;"/></p>
+								<p th:if="${juego.cooperativo == true}"><img src="https://i.ibb.co/QbTtNgz/circle-cropped-1.png" style="width: 10%; height: 10%;"/></p>
+							</td>
+						</tr>
+						<tr>
+							<td class="td-nombre">Edad Minima Recomendada</td>
+							<td><p th:text=${juego.edadRecomendada}/></td>
+						</tr>
+						<tr>
+							<td class="td-nombre">¿Contiene cartas?</td>
+							<td>
+								<p th:if="${juego.tieneCartas == false}"><img src="https://i.ibb.co/DfvFvKz/circle-cropped-2.png" style="width: 10%; height: 10%;"/></p>
+								<p th:if="${juego.tieneCartas == true}"><img src="https://i.ibb.co/QbTtNgz/circle-cropped-1.png" style="width: 10%; height: 10%;"/></p>
+							</td>
+						</tr>
+						<tr>
+							<td class="td-nombre">¿Tiene tablero?</td>
+							<td>
+								<p th:if="${juego.tieneTablero == false}"><img src="https://i.ibb.co/DfvFvKz/circle-cropped-2.png" style="width: 10%; height: 10%;"/></p>
+								<p th:if="${juego.tieneTablero == true}"><img src="https://i.ibb.co/QbTtNgz/circle-cropped-1.png" style="width: 10%; height: 10%;"/></p>
+							</td>
+						</tr>
+						<tr>
+							<td class="td-nombre">¿Contiene miniaturas?</td>
+							<td>
+								<p th:if="${juego.tieneMiniaturas == false}"><img src="https://i.ibb.co/DfvFvKz/circle-cropped-2.png" style="width: 10%; height: 10%;"/></p>
+								<p th:if="${juego.tieneMiniaturas == true}"><img src="https://i.ibb.co/QbTtNgz/circle-cropped-1.png" style="width: 10%; height: 10%;"/></p>
+							</td>
+						</tr>
+						<tr>
+							<td class="td-nombre">¿Contiene dados?</td>
+							<td>
+								<p th:if="${juego.tieneDados == false}"><img src="https://i.ibb.co/DfvFvKz/circle-cropped-2.png" style="width: 10%; height: 10%;"/></p>
+								<p th:if="${juego.tieneDados == true}"><img src="https://i.ibb.co/QbTtNgz/circle-cropped-1.png" style="width: 10%; height: 10%;"/></p>
+							</td>
+						</tr>
+						<tr>
+							<td class="td-nombre">Tamaño del Tablero</td>
+							<td>
+								<p th:if="${juego.tamTablero != null}"><p th:text="${juego.tamTablero}"/></p>
+								<p th:if="${juego.tamTablero == null}">No tiene tablero</p>
+							</td>
+						</tr>
+						<tr>
+							<td class="td-nombre">¿Es apto para viaje?</td>
+							<td>
+								<p th:if="${juego.viaje == false}"><img src="https://i.ibb.co/DfvFvKz/circle-cropped-2.png" style="width: 10%; height: 10%;"/></p>
+								<p th:if="${juego.viaje == true}"><img src="https://i.ibb.co/QbTtNgz/circle-cropped-1.png" style="width: 10%; height: 10%;"/></p>
+							</td>
+						</tr>
+					</tbody>
+					</tr>
+				</table>
+			</div>
+			<div class="lado-der">
+				<div class="fotos">
+					<p>Categoria: <p th:text="${juego.categoria.nombre}"/></p>
+					<img onmouseover="big.src=small2.src"
+						th:src="${juego.categoria.imagen}" alt="2" name="small2" />
+				</div>
+				<div class="fotos">
+					<p>Editorial: <p th:text="${juego.editorial.nombre}"/></p>
+					<img onmouseover="big.src=small1.src"
+						th:src="${juego.editorial.imagen}" alt="1" name="small1" />
+				</div>
+				<div id="big">
+					<!-- 					<img th:src="${juego.portada}" alt="1" name="big" /> -->
+					<img
+						src="https://i.ibb.co/3sRZr9m/elige.png"
+						alt="1" name="big" />
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+
+</body>
+</html>

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.modelo.Juego;
 import com.example.servicio.CategoriaService;
+import com.example.servicio.EditorialService;
 import com.example.servicio.JuegoService;
 
 
@@ -25,6 +26,9 @@ public class JuegoController {
 
 	@Autowired
 	private CategoriaService categoriaService;
+	
+	@Autowired
+	private EditorialService editorialService;
 
 	@GetMapping("/")
 	public String index(Model model) {
@@ -36,20 +40,23 @@ public class JuegoController {
 	public String nuevoJuego(Model model) {
 		model.addAttribute("juego", new Juego());
 		model.addAttribute("categorias", categoriaService.findAll());
+		model.addAttribute("editoriales", editorialService.findAll());
 		return "admin/form-juego";
 	}
 
 	@PostMapping("/nuevo/submit")
 	public String submitNuevoJuego(@Valid Juego juego, BindingResult bindingResult, Model model) {
 
-		if (bindingResult.hasErrors()) {
-			model.addAttribute("categorias", categoriaService.findAll());
-			return "admin/form-juego";
-		} else {
-			juegoService.save(juego);
-			return "redirect:/admin/juego/";
-
-		}
+//		if (bindingResult.hasErrors()) {
+//			model.addAttribute("categorias", categoriaService.findAll());
+//			return "admin/form-juego";
+//		} else {
+//			juegoService.save(juego);
+//			return "redirect:/admin/juego/";
+//
+//		}
+		juegoService.save(juego);
+		return "redirect:/admin/juego/";
 
 	}
 
@@ -61,6 +68,7 @@ public class JuegoController {
 		if (juego != null) {
 			model.addAttribute("juego", juego);
 			model.addAttribute("categorias", categoriaService.findAll());
+			model.addAttribute("editoriales", editorialService.findAll());
 			return "admin/form-juego";
 		} else {
 			return "redirect:/admin/juego/";

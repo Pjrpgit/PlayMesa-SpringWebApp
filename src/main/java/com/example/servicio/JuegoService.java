@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.modelo.Categoria;
+import com.example.modelo.Editorial;
 import com.example.modelo.Juego;
 import com.example.repositorio.JuegoRepository;
 
@@ -25,8 +26,16 @@ public class JuegoService {
 		return repositorio.findByCategoria(categoria);
 	}
 	
+	public List<Juego> findAllByEditorial(Editorial editorial) {
+		return repositorio.findByEditorial(editorial);
+	}
+	
 	public List<Juego> findAllByCategoria(Integer categoriaId) {
 		return repositorio.findByCategoriaId(categoriaId);
+	}
+	
+	public List<Juego> findAllByEditorial(Integer editorialId) {
+		return repositorio.findByEditorialId(editorialId);
 	}
 	
 	public Juego findById(Integer id) {
@@ -43,10 +52,15 @@ public class JuegoService {
 		return result;
 	}
 	
-	public int numeroProductosCategoria(Categoria categoria) {
-		return repositorio.findNumProductosByCategoria(categoria);
+	public int numeroJuegosCategoria(Categoria categoria) {
+		return repositorio.findNumJuegosByCategoria(categoria);
 	}
 	
+	public int numeroJuegosEditorial(Editorial editorial) {
+		return repositorio.findNumJuegosByEditorial(editorial);
+	}
+	
+
 	
 
 	public List<Juego> obtenerProductosAleatorios(int numero) {

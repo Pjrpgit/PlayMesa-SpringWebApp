@@ -20,20 +20,7 @@
     <![endif]-->
 </head>
 <body>
-	<header>
-		<nav class="navbar navbar-default">
-	  <div class="container-fluid">
-	    <div class="navbar-header">
-	      <a class="navbar-brand" href="#" th:href="@{/index}">PlayMesa</a>
-	    </div>
-	    <ul class="nav navbar-nav navbar-right">
-	      <li class="active"><a href="#" th:href="@{/admin/categoria/}">Lista Categorías</a></li>
-	      <li><a href="#">Contacto</a></li>
-	      <li><a href="#" th:href="@{/logout}">Cerrar Sesión</a></li>
-	    </ul>
-	  </div>
-	</nav>
-	</header>
+
 	<div class="container">
 		<div class="row">
 			<div class="col-md-offset-2 col-md-8">
@@ -43,32 +30,35 @@
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<span>No se puede borrar una categoria que tiene asociados juegos</span>
-				</div>
-				<div class="pull-right">
-					<a href="form-categoria.html" th:href="@{/admin/categoria/nueva}"
-						class="btn btn-primary">Nueva categoría</a>
-
+					<span>Error al intentar borrar</span>
 				</div>
 				<table class="table">
 					<thead>
 						<tr>
-							<th>Imagen</th>
-							<th>Nombre</th>
+							<th>Juego</th>
+							<th>Habilidad</th>
+							<th>Nivel</th>
+							<th>Descripción</th>
 							<th>Operaciones</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="categoria : ${categorias}">
-							<td><img
-								th:src="${not (#strings.isEmpty(categoria.imagen))} ? ${categoria.imagen} : 'http://placehold.it/48x48'"
-								class="img-responsive icono-categoria" alt="imagen" /></td>
-							<td th:text="${categoria.nombre}"></td>
+						<tr th:each="juegohabilidad : ${juegohabilidades}">
+							<td th:text="${juegohabilidad.juegoId.nombre}"></td>
+							<td th:text="${juegohabilidad.habilidadId.nombre}"></td>
+							<td>
+							<div class="rating col-md-8">
+												<span th:each="i:${#numbers.sequence(1,5)}"
+													class="glyphicon"
+													th:classappend="${i <= juegohabilidad.nivel} ? 'glyphicon-star': 'glyphicon-star-empty'"></span>
+											</div>
+							</td>																									
+							<td th:text="${juegohabilidad.descripcion}"></td>
 							<td class="operaciones"><a href="#"
-								th:href="@{/admin/categoria/editar/{id}(id=${categoria.categoriaId})}"
+								th:href="@{/admin/juegohabilidad/editar/{id}(id=${juegohabilidad.relacionId})}"
 								class="btn btn-primary">Editar</a> 
 								<button type="button" class="btn btn-danger" data-toggle="modal"
-									data-target="#delete-modal" th:data-id="${categoria.categoriaId}">Borrar</button>
+									data-target="#delete-modal" th:data-id="${juegohabilidad.relacionId}">Borrar</button>
 							</td>
 						</tr>
 					</tbody>
@@ -90,7 +80,7 @@
 				<div class="modal-body">
 					<p>¿Está usted seguro de borrar esta categoría?</p>
 					<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-					<a href="/admin/categoria/borrar/" class="btn btn-danger">Sí</a>
+					<a href="/admin/juegohabilidad/borrar/" class="btn btn-danger">Sí</a>
 				</div>
 			</div>
 

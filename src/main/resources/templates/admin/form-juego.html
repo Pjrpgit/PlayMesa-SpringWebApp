@@ -22,7 +22,20 @@
     <![endif]-->
 </head>
 <body>
-
+	<header>
+		<nav class="navbar navbar-default">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <a class="navbar-brand" href="#" th:href="@{/index}">PlayMesa</a>
+	    </div>
+	    <ul class="nav navbar-nav navbar-right">
+	      <li class="active"><a href="#" th:href="@{/admin/juego/nuevo}">Formulario Juego</a></li>
+	      <li><a href="#">Contacto</a></li>
+	      <li><a href="#" th:href="@{/logout}">Cerrar Sesión</a></li>
+	    </ul>
+	  </div>
+	</nav>
+	</header>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-offset-2 col-md-8">
@@ -32,63 +45,117 @@
 						<span th:text="${juego.juegoId} ? 'Editar' : 'Nuevo'"></span>
 						juego
 					</h1>
-					<input type="hidden" th:field="*{juegoId}" id="id" />
+					<input type="hidden" th:field="*{juegoId}" id="id" /> <input
+						type="hidden" th:field="*{juegoHabilidadList}"
+						id="juegoHabilidadList" />
 					<div class="form-group"
 						th:classappend="${#fields.hasErrors('nombre')} ? 'has-error'">
-						<label class="control-label" for="nombre">Nombre</label> <input type="text"
-							class="form-control" id="nombre" placeholder="Nombre"
+						<label class="control-label" for="nombre">Nombre</label> <input
+							type="text" class="form-control" id="nombre" placeholder="Nombre"
 							th:field="*{nombre}" /> <span
 							th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"
 							class="help-block" id="nombre-error">Errores</span>
 					</div>
 					<div class="form-group"
 						th:classappend="${#fields.hasErrors('portada')} ? 'has-error'">
-						<label class="control-label" for="portada">URL de la imagen</label> <input type="url"
-							class="form-control" id="portada" placeholder="http://..."
-							th:field="*{portada}"> <span
+						<label class="control-label" for="portada">URL de la
+							imagen</label> <input type="url" class="form-control" id="portada"
+							placeholder="http://..." th:field="*{portada}"> <span
 							th:if="${#fields.hasErrors('portada')}" th:errors="*{portada}"
 							class="help-block" id="imagen-error">Errores</span>
 
 					</div>
 					<div class="form-group">
-						<label class="control-label" for="autor">Autor</label> <input type="text"
-							class="form-control" id="autor"
-							placeholder="autor" th:field="*{autor}" />
+						<label class="control-label" for="autor">Autor</label> <input
+							type="text" class="form-control" id="autor" placeholder="autor"
+							th:field="*{autor}" />
 					</div>
 					<div class="form-group"
 						th:classappend="${#fields.hasErrors('numeroJugadores')} ? 'has-error'">
-						<label class="control-label" for="numeroJugadores">NºMax jugadores</label> <input type="number"
-							min="1" max="99" step="1" class="form-control" id="numeroJugadores" placeholder="1" th:field="*{numeroJugadores}" />
-						<span th:if="${#fields.hasErrors('numeroJugadores')}" th:errors="*{numeroJugadores}"
-							class="help-block" id="numeroJugadores-error">Errores</span>
+						<label class="control-label" for="numeroJugadores">NºMax
+							jugadores</label> <input type="number" min="1" max="99" step="1"
+							class="form-control" id="numeroJugadores" placeholder="1"
+							th:field="*{numeroJugadores}" /> <span
+							th:if="${#fields.hasErrors('numeroJugadores')}"
+							th:errors="*{numeroJugadores}" class="help-block"
+							id="numeroJugadores-error">Errores</span>
 					</div>
 					<div class="form-group"
 						th:classappend="${#fields.hasErrors('edadRecomendada')} ? 'has-error'">
-						<label class="control-label" for="edadRecomendada">Edad Recomendada</label> <input type="number"
-							min="0" max="99" step="1" class="form-control" id="edadRecomendada" placeholder="5" th:field="*{edadRecomendada}" />
-						<span th:if="${#fields.hasErrors('edadRecomendada')}" th:errors="*{edadRecomendada}"
-							class="help-block" id="numeroJugadores-error">Errores</span>
+						<label class="control-label" for="edadRecomendada">Edad
+							Recomendada</label> <input type="number" min="0" max="99" step="1"
+							class="form-control" id="edadRecomendada" placeholder="5"
+							th:field="*{edadRecomendada}" /> <span
+							th:if="${#fields.hasErrors('edadRecomendada')}"
+							th:errors="*{edadRecomendada}" class="help-block"
+							id="numeroJugadores-error">Errores</span>
 					</div>
 					<div class="form-group">
-						<label class="control-label" for="complejidad">Complejidad</label> 
-						<select
-							th:field="*{complejidad}" class="form-control">
+						<label class="control-label" for="complejidad">Complejidad</label>
+						<select th:field="*{complejidad}" class="form-control">
 							<option value="null">---</option>
 							<option value="Baja">Baja</option>
 							<option value="Media">Media</option>
 							<option value="Alta">Alta</option>
 						</select>
-					</div>				
-					 <div class="form-group">
-						<label class="control-label" for="tematica">Temática</label> <input type="text"
-							class="form-control" id="tematica"
+					</div>
+					<div class="form-group">
+						<label class="control-label" for="complejidad">Dimensiones
+							tablero</label> <select th:field="*{tamTablero}" class="form-control">
+							<option value="null">---</option>
+							<option value="Baja">Pequeño</option>
+							<option value="Media">Mediano</option>
+							<option value="Alta">Grande</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label class="control-label" for="tematica">Temática</label> <input
+							type="text" class="form-control" id="tematica"
 							placeholder="tematica" th:field="*{tematica}" />
 					</div>
 					<div class="form-group">
-						<label class="control-label" for="cooperativo"> <input type="checkbox"
-							id="cooperativo" value="true" th:field="*{cooperativo}"> Es
-							cooperativo
+						<label class="control-label" for="cooperativo"> <input
+							type="checkbox" id="cooperativo" value="true"
+							th:field="*{cooperativo}"> Es cooperativo
 						</label>
+					</div>
+					<div class="form-group">
+						<label class="control-label" for="viaje"> <input
+							type="checkbox" id="viaje" value="true" th:field="*{viaje}">
+							Es apto para viaje
+						</label>
+					</div>
+					<div class="form-group">
+						<label class="control-label" for="tieneCartas"> <input
+							type="checkbox" id="tieneCartas" value="true"
+							th:field="*{tieneCartas}"> Tiene cartas
+						</label>
+					</div>
+					<div class="form-group">
+						<label class="control-label" for="tieneTablero"> <input
+							type="checkbox" id="tieneTablero" value="true"
+							th:field="*{tieneTablero}"> Tiene tablero
+						</label>
+					</div>
+					<div class="form-group">
+						<label class="control-label" for="tieneMiniaturas"> <input
+							type="checkbox" id="tieneMiniaturas" value="true"
+							th:field="*{tieneMiniaturas}"> Tiene miniaturas
+						</label>
+					</div>
+					<div class="form-group">
+						<label class="control-label" for="tieneDados"> <input
+							type="checkbox" id="tieneDados" value="true"
+							th:field="*{tieneDados}"> Tiene dados
+						</label>
+					</div>
+					<div class="form-group"
+						th:classappend="${#fields.hasErrors('duracion')} ? 'has-error'">
+						<label class="control-label" for="duracion">Duracion</label> <input
+							type="number" min="0" max="999" step="1" class="form-control"
+							id="duracion" placeholder="15" th:field="*{duracion}" /> <span
+							th:if="${#fields.hasErrors('duracion')}" th:errors="*{duracion}"
+							class="help-block" id="duracion-error">Errores</span>
 					</div>
 					<div class="form-group"
 						th:classappend="${#fields.hasErrors('categoria')} ? 'has-error'">
@@ -96,12 +163,28 @@
 							th:field="*{categoria}" class="form-control">
 							<option value="-1">---</option>
 							<option th:each="categoria : ${categorias}"
-								th:value="${categoria.id}" th:text="${categoria.nombre}">Categoría</option>
+								th:value="${categoria.categoriaId}"
+								th:text="${categoria.nombre}">Categoría</option>
 						</select> <span th:if="${#fields.hasErrors('categoria')}"
 							th:errors="*{categoria}" class="help-block" id="categoria-error">Errores</span>
 
 					</div>
-					<button type="submit" class="btn btn-default">Enviar</button>
+					<div class="form-group"
+						th:classappend="${#fields.hasErrors('editorial')} ? 'has-error'">
+						<label class="control-label" for="editorial">Editorial</label> <select
+							th:field="*{editorial}" class="form-control">
+							<option value="-1">---</option>
+							<option th:each="editorial : ${editoriales}"
+								th:value="${editorial.editorialId}"
+								th:text="${editorial.nombre}">Editorial</option>
+						</select> <span th:if="${#fields.hasErrors('editorial')}"
+							th:errors="*{editorial}" class="help-block" id="editorial-error">Errores</span>
+
+					</div>
+
+					<div>
+						<button type="submit" class="btn btn-default">Enviar</button>
+					</div>
 				</form>
 			</div>
 		</div>

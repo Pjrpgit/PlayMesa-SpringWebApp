@@ -66,7 +66,7 @@ public class CategoriaController {
 		
 		if (categoria != null) {
 			
-			if (juegoService.numeroProductosCategoria(categoria) == 0) {
+			if (juegoService.numeroJuegosCategoria(categoria) == 0) {
 				categoriaService.delete(categoria);				
 			} else {
 				return "redirect:/admin/categoria/?error=true";

@@ -5,16 +5,14 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-<title></title>
+<title>Formulario editorial</title>
 
 <!-- Bootstrap -->
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
 	th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
 <link href="../../static/css/style.css" th:href="@{/css/style.css}"
 	rel="stylesheet" />
-	
 <!-- solucion moment -->
-
     
 </head>
 <body>
@@ -25,7 +23,7 @@
 	      <a class="navbar-brand" href="#" th:href="@{/index}">PlayMesa</a>
 	    </div>
 	    <ul class="nav navbar-nav navbar-right">
-	      <li class="active"><a href="#" th:href="@{/admin/categoria/nueva}">Formulario Categoria</a></li>
+	      <li class="active"><a href="#" th:href="@{/admin/editorial/nueva}">Formulario Editorial</a></li>
 	      <li><a href="#">Contacto</a></li>
 	      <li><a href="#" th:href="@{/logout}">Cerrar Sesión</a></li>
 	    </ul>
@@ -36,13 +34,13 @@
 		<div class="row">
 			<div class="col-md-offset-2 col-md-8">
 				<form method="post" action="#"
-					th:action="@{/admin/categoria/nueva/submit}"
-					th:object="${categoria}">
+					th:action="@{/admin/editorial/nueva/submit}"
+					th:object="${editorial}">
 					<h1>
-						<span th:text="${categoria.categoriaId} ? 'Editar' : 'Nueva'"></span>
-						categoría
+						<span th:text="${editorial.editorialId} ? 'Editar' : 'Nueva'"></span>
+						Editorial
 					</h1>
-					<input type="hidden" th:field="*{categoriaId}" id="id" />
+					<input type="hidden" th:field="*{editorialId}" id="id" />
 					<div class="form-group">
 						<label class="control-label" for="nombre">Nombre</label> <input type="text"
 							class="form-control" id="nombre" placeholder="Nombre"

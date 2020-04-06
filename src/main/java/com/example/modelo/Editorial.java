@@ -43,7 +43,7 @@ public class Editorial implements Serializable {
     private String url;
     @URL
     private String imagen;
-    @OneToMany(mappedBy = "editorialId")
+    @OneToMany(mappedBy = "editorial")
     private List<Juego> juegoList;
 
     public Editorial() {

@@ -7,9 +7,11 @@ import org.springframework.stereotype.Service;
 
 import com.example.auth.repository.RoleRepository;
 import com.example.auth.repository.UserRepository;
+import com.example.modelo.Role;
 import com.example.modelo.User;
 
 import java.util.HashSet;
+import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -23,7 +25,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public void save(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        user.setRoles(new HashSet<>(roleRepository.findAll()));
+        Set<Role> roles=new HashSet<>();
+        roles.add(roleRepository.findByName("ROLE_USER"));
+        user.setRoles(roles); //hay que cambiar esto para que los usuarios no tengan todos los roles
         userRepository.save(user);
     }
 

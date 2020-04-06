@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.modelo.Juego;
 import com.example.servicio.CategoriaService;
+import com.example.servicio.EditorialService;
+import com.example.servicio.HabilidadService;
 import com.example.servicio.JuegoService;
 
 
@@ -25,26 +27,24 @@ public class MainController {
 	private CategoriaService categoriaService;
 	
 	@Autowired
+	private HabilidadService habilidadService;
+	
+	@Autowired
+	private EditorialService editorialService;
+	
+	@Autowired
 	private JuegoService juegoService;
 	
+	
 
-//	@GetMapping("/login")
-//	public String login() {
-//		//podemos tramitar variable con requestparam..? o con PathVariable.
-//		return "login"; //si retorno ":redirect" me envia a este metodo
-//		
-//	}
-//	@GetMapping("/registration")
-//	public String register() {
-//		//podemos tramitar variable con requestparam..? o con PathVariable.
-//		return "registration"; //si retorno ":redirect" me envia a este metodo
-//		
-//	}
 	
 	@GetMapping({"/","/index"})
-	public String index(@RequestParam(name="idCategoria", required=false) Integer idCategoria, Model model) {		
+	public String index(@RequestParam(name="idCategoria", required=false) Integer idCategoria,@RequestParam(name="idEditorial", required=false) Integer idEditorial, Model model) {		
 		
 		model.addAttribute("categorias", categoriaService.findAll());
+		
+		model.addAttribute("editoriales", editorialService.findAll());
+		
 		
 		List<Juego> juegos;
 		
@@ -54,13 +54,19 @@ public class MainController {
 			juegos = juegoService.findAllByCategoria(idCategoria);
 		}
 		
-		model.addAttribute("productos", juegos);
+		if (idEditorial == null) {
+			juegos = juegoService.obtenerProductosAleatorios(NUM_JUEGOS_ALEATORIOS);
+		} else {			
+			juegos = juegoService.findAllByEditorial(idEditorial);
+		}
+		
+		model.addAttribute("juegos", juegos);
 		
 		return "index";
 	}
 	
-	@GetMapping("/juego/{id}")
-	public String showDetails(@PathVariable("id") Integer id, Model model) {
+	@GetMapping("/juego/{juegoId}")
+	public String showDetails(@PathVariable("juegoId") Integer id, Model model) {
 		Juego p = juegoService.findById(id);
 		if (p != null) {
 			model.addAttribute("juego", p);
@@ -71,9 +77,18 @@ public class MainController {
 		
 	}
 	
-//	@GetMapping("/error")
-//	public String errorTrace() {
-//		return "error";
-//	}
+	@GetMapping("/conocenos")
+	public String showDetails() {
+		
+		return "conocenos";
+		
+	}
+	
+	@GetMapping("/habilidades")
+	public String habilidades(Model model) {
+		model.addAttribute("habilidades", habilidadService.findAll());
+		return "list-habilidades";
+	}
+	
 	
 }

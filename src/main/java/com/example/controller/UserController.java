@@ -23,26 +23,26 @@ public class UserController {
     @Autowired
     private UserValidator userValidator;
 
-    @GetMapping("/registration")
+    @GetMapping({"/registration"})
     public String registration(Model model) {
         model.addAttribute("userForm", new User());
-
         return "registration";
     }
 
-    @PostMapping("/registration")
-    public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult) {
+    @PostMapping("/registration/submit")
+    public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) {
         userValidator.validate(userForm, bindingResult);
 
         if (bindingResult.hasErrors()) {
             return "registration";
         }
+        
 
         userService.save(userForm);
 
         securityService.autoLogin(userForm.getUsername(), userForm.getPasswordConfirm());
 
-        return "redirect:/welcome";
+        return "redirect:/index";
     }
 
     @GetMapping("/login")
@@ -55,5 +55,6 @@ public class UserController {
 
         return "login";
     }
+    
 
 }

@@ -17,6 +17,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.URL;
 
@@ -51,6 +52,7 @@ public class Juego implements Serializable {
     @Basic(optional = false)
     @Column(name = "juego_id")
     private Integer juegoId;
+    @NotEmpty
     private String nombre;
     private String autor;
     @Column(name = "numero_jugadores")
@@ -62,24 +64,24 @@ public class Juego implements Serializable {
     @Max(999)
     private Integer duracion;
     private String tematica;
-    private Short cooperativo;
+    private boolean cooperativo;
     @Column(name = "edad_recomendada")
     @Min(0)
     @Max(99)
     private Integer edadRecomendada;
     @Column(name = "tiene_cartas")
-    private Short tieneCartas;
+    private boolean tieneCartas;
     @Column(name = "tiene_tablero")
-    private Short tieneTablero;
+    private boolean tieneTablero;
     @Column(name = "tiene_miniaturas")
-    private Short tieneMiniaturas;
+    private boolean tieneMiniaturas;
     @Column(name = "tiene_dados")
-    private Short tieneDados;
+    private boolean tieneDados;
     @URL
     private String portada;
     @Column(name = "tam_tablero")
     private String tamTablero;
-    private Short viaje;
+    private boolean viaje;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "juegoId")
     private List<JuegoHabilidad> juegoHabilidadList;
     @JoinColumn(name = "categoria_id", referencedColumnName = "categoria_id")
@@ -87,7 +89,7 @@ public class Juego implements Serializable {
     private Categoria categoria;
     @JoinColumn(name = "editorial_id", referencedColumnName = "editorial_id")
     @ManyToOne
-    private Editorial editorialId;
+    private Editorial editorial;
 
     public Juego() {
     }
@@ -152,11 +154,11 @@ public class Juego implements Serializable {
         this.tematica = tematica;
     }
 
-    public Short getCooperativo() {
+    public boolean getCooperativo() {
         return cooperativo;
     }
 
-    public void setCooperativo(Short cooperativo) {
+    public void setCooperativo(boolean cooperativo) {
         this.cooperativo = cooperativo;
     }
 
@@ -168,35 +170,35 @@ public class Juego implements Serializable {
         this.edadRecomendada = edadRecomendada;
     }
 
-    public Short getTieneCartas() {
+    public boolean getTieneCartas() {
         return tieneCartas;
     }
 
-    public void setTieneCartas(Short tieneCartas) {
+    public void setTieneCartas(boolean tieneCartas) {
         this.tieneCartas = tieneCartas;
     }
 
-    public Short getTieneTablero() {
+    public boolean getTieneTablero() {
         return tieneTablero;
     }
 
-    public void setTieneTablero(Short tieneTablero) {
+    public void setTieneTablero(boolean tieneTablero) {
         this.tieneTablero = tieneTablero;
     }
 
-    public Short getTieneMiniaturas() {
+    public boolean getTieneMiniaturas() {
         return tieneMiniaturas;
     }
 
-    public void setTieneMiniaturas(Short tieneMiniaturas) {
+    public void setTieneMiniaturas(boolean tieneMiniaturas) {
         this.tieneMiniaturas = tieneMiniaturas;
     }
 
-    public Short getTieneDados() {
+    public boolean getTieneDados() {
         return tieneDados;
     }
 
-    public void setTieneDados(Short tieneDados) {
+    public void setTieneDados(boolean tieneDados) {
         this.tieneDados = tieneDados;
     }
 
@@ -216,11 +218,11 @@ public class Juego implements Serializable {
         this.tamTablero = tamTablero;
     }
 
-    public Short getViaje() {
+    public boolean isViaje() {
         return viaje;
     }
 
-    public void setViaje(Short viaje) {
+    public void setViaje(boolean viaje) {
         this.viaje = viaje;
     }
 
@@ -232,20 +234,20 @@ public class Juego implements Serializable {
         this.juegoHabilidadList = juegoHabilidadList;
     }
 
-    public Categoria getCategoriaId() {
+    public Categoria getCategoria() {
         return categoria;
     }
 
-    public void setCategoriaId(Categoria categoriaId) {
-        this.categoria = categoriaId;
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 
-    public Editorial getEditorialId() {
-        return editorialId;
+    public Editorial getEditorial() {
+        return editorial;
     }
 
-    public void setEditorialId(Editorial editorialId) {
-        this.editorialId = editorialId;
+    public void setEditorial(Editorial editorial) {
+        this.editorial = editorial;
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.example.modelo;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+//import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
 import java.util.Set;
@@ -68,4 +69,14 @@ public class User {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+    
+    
 }

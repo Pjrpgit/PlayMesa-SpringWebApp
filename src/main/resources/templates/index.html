@@ -13,214 +13,129 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
 	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
 	crossorigin="anonymous">
-
+<link href="../../static/css/style.css" th:href="@{/css/style.css}"
+	rel="stylesheet" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <title>PlayMesa</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-body {
-  font-family: "Lato", sans-serif;
-}
 
-.sidebar {
-  opacity: 0.9;
-  height: 90%;
-  width: 0;
-  position: fixed;
-  z-index: 1;
-  top: 86px;
-  left: 0;
-  background-color: #f4f5f9;
-  overflow-x: hidden;
-  transition: 0.5s;
-  padding-top: 60px;
-}
-
-.sidebar a {
-  padding: 8px 8px 8px 32px;
-  text-decoration: none;
-  font-size: 23px;
-  color: #818181;
-  display: block;
-  transition: 0.3s;
-}
-
-.sidebar a:hover {
-  color: #0d0d0d;
-}
-
-.sidebar .closebtn {
-  position: absolute;
-  top: 0;
-  right: 25px;
-  font-size: 36px;
-  margin-left: 50px;
-}
-
-.openbtn {
-  font-size: 20px;
-  cursor: pointer;
-  background-color: #111;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-}
-
-.openbtn:hover {
-  background-color: #444;
-}
-
-#main {
-  transition: margin-left .5s;
-  padding: 16px;
-}
-
-/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
-@media screen and (max-height: 450px) {
-  .sidebar {padding-top: 15px;}
-  .sidebar a {font-size: 18px;}
-}
-</style>
 </head>
 <body>
 	<header>
-	<nav class="navbar navbar-expand-sm   navbar-light bg-light">
-		<div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-							<li class="nav-item"><a class="nav-link" href="#"><img src="https://i.ibb.co/TL6jk4v/menu.jpg" onclick="openNav()"/><span
-						class="sr-only">(current)</span></a></li>
-				<li class="nav-item"><a class="nav-link" href="#"><img src="https://i.ibb.co/SJT8J1T/playmesa.jpg"/><span
-						class="sr-only">(current)</span></a></li>
-<!-- 					<li class="input-group">
-						<input type="text" class="form-control" placeholder="Search">
-                                    <div class="col-auto">
-                                        <button class="btn btn-lg btn-success" type="submit">Search</button>
-                                    </div>
-					</li> -->
-			</ul>
-			<ul class="nav navbar-nav navbar-right">
-				<li class="nav-item"><a
-					class="nav-link" href="#">MisJuegos</a></li>
-				<li class="nav-item dropdown dmenu">
-				<a	class="nav-link dropdown-toggle" href="#" id="navbardrop"
-					data-toggle="dropdown"> Edicion </a>
-					<div class="dropdown-menu sm-menu">
-						<a class="dropdown-item" href="admin/list-categoria.html"
-								th:href="@{/admin/juego/}">Juegos</a>
-						<a class="dropdown-item" href="admin/list-categoria.html"
-								th:href="@{/admin/categoria/}">Categorías</a> 
-					</div></li>
-				<li class="nav-item"><a class="nav-link" href="#">Conocenos</a>
-				</li>
-				<li class="nav-item"><a class="nav-link" href="#">Contacto</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">Logout</a></li>
-				<!-- <li class="nav-item dropdown dmenu">
-            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-              Dropdown link
-            </a>
-            <div class="dropdown-menu sm-menu">
-              <a class="dropdown-item" href="#">Link 1</a>
-              <a class="dropdown-item" href="#">Link 2</a>
-              <a class="dropdown-item" href="#">Link 3</a>
-              <a class="dropdown-item" href="#">Link 4</a>
-              <a class="dropdown-item" href="#">Link 5</a>
-              <a class="dropdown-item" href="#">Link 6</a>
-            </div>
-          </li> -->
-			</ul>
-		</div>
-	</nav>
+		<nav class="navbar navbar-expand-sm">
+			<div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+					<li class="nav-item"><a class="nav-link" href="/index"><img
+							src="https://i.ibb.co/Z8TR9jr/Logo.png" /><span class="sr-only">(current)</span></a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right" style="width: 40%">
+					<li class="input-group"><input type="text"
+						placeholder="Search"> <!-- 						<div class="col-auto"> -->
+						<!-- 							<button class="btn btn-lg btn-success" type="submit">Search</button> -->
+						<!-- 						</div> --></li>
+					<li class="nav-item"><a class="nav-link" href="#">Bienvenido <span class="nomuser" sec:authentication="name">Ninja</span></a></li>
+					<li class="nav-item"><a class="nav-link" href="#">MisJuegos</a></li>
+					<li class="nav-item"><a class="nav-link"
+						th:href="@{/habilidades}">Habilidades</a></li>
+					<div
+						th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+						<li class="nav-item dropdown dmenu"><a
+							class="nav-link dropdown-toggle" href="#" id="navbardrop"
+							data-toggle="dropdown"> Edicion </a>
+							<div class="dropdown-menu sm-menu">
+								<a class="dropdown-item" href="admin/list-categoria.html"
+									th:href="@{/admin/juego/}">Juegos</a> <a class="dropdown-item"
+									href="admin/list-categoria.html" th:href="@{/admin/categoria/}">Categorías</a>
+								<a class="dropdown-item" href="admin/list-editorial.html"
+									th:href="@{/admin/editorial/}">Editoriales</a>
+							</div></li>
+					</div>
+					<li class="nav-item dropdown dmenu"><a
+						class="nav-link dropdown-toggle" href="#" id="navbardrop"
+						data-toggle="dropdown">Busqueda</a>
+						<div class="dropdown-menu sm-menu">
+							<a class="dropdown-item" href="admin/list-categoria.html"
+								th:href="@{/admin/juego/}">Nombre</a> <a class="dropdown-item"
+								href="admin/list-categoria.html" th:href="@{/admin/categoria/}">Categoría</a>
+							<a class="dropdown-item" href="admin/list-editorial.html"
+								th:href="@{/admin/editorial/}">Editoriales</a> <a
+								class="dropdown-item" href="admin/list-editorial.html"
+								th:href="@{/admin/editorial/}">Num Jugadores</a> <a
+								class="dropdown-item" href="admin/list-editorial.html"
+								th:href="@{/admin/editorial/}">Habilidades</a>
+						</div></li>
+					<li class="nav-item"><a class="nav-link" href="#"
+						th:href="@{/conocenos}">Conocenos</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">Contacto</a></li>
+					<li class="nav-item"><a class="nav-link" href="#"
+						th:href="@{/logout}">Cerrar sesion</a></li>
+				</ul>
+			</div>
+		</nav>
 	</header>
-	<aside>
-		<div id="mySidebar" class="sidebar">
-		  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-		  <a class="nav-link" href="#">Juegos</a>
-		  <a class="nav-link" href="#">Categorias</a>
-		  <a class="nav-link" href="#">Habilidades</a>
-		  <a class="nav-link" href="#">Editoriales</a>
-		</div>
+	<section style="margin-left: 20%">
+		<h1>Juegos Random</h1>
 
-
-	</aside>
-	<section>
-	<h1 style="margin-left:20%">Juegos Random</h1>
-	<div class="row">
-					<div class="col-sm-3" th:each="juego : ${juegos}">
-						<a href="#" th:href="@{/juego/{juegoId}(id=${juego.juegoId})}">
-							<div class="col-item">
-								<div class="photo">
-									<img src="http://placehold.it/350x260"
-										th:src="${#strings.isEmpty(juego.portada)} ? 'http://placehold.it/350x260' : ${juego.portada}"
-										class="img-responsive" alt="imagen juego" />
-								</div>
-								<div class="info">
-									<div class="row">
-										<div class="price col-md-12">
-											<h5 th:text="${#strings.abbreviate(juego.nombre,65)}">Nombre</h5>
-<!-- 											<div class="price-text-color">
-												<span
-													th:text="${producto.descuento == 0} ? ${#numbers.formatCurrency(producto.pvp)} : ${#numbers.formatCurrency(producto.pvp * (1 - producto.descuento))}">10</span>
-
-												<th:block th:if="${producto.descuento > 0}">
-													<span class="price-original"
-														th:text="${#numbers.formatCurrency(producto.pvp)}"></span>
-													<span class="label label-danger"
-														th:text=${#numbers.formatPercent(producto.descuento,1,0)}></span>
-												</th:block>
-											</div> -->
-										</div>
-										<div class="row">
-<!-- 											<div class="rating col-md-4"> -->
-<!-- 												<p> -->
-<!-- 													<span -->
-<!-- 														th:text="${#numbers.formatDecimal(producto.getPuntuacionMedia(),1,1)}">4</span>/5 -->
-<!-- 												</p> -->
-<!-- 											</div> -->
-<!-- 											<div class="rating col-md-8"> -->
-<!-- 												<span th:each="i:${#numbers.sequence(1,5)}" -->
-<!-- 													class="glyphicon" -->
-<!-- 													th:classappend="${i <= producto.getPuntuacionMedia()} ? 'glyphicon-star': 'glyphicon-star-empty'"></span> -->
-<!-- 											</div> -->
-										</div>
+		<div class="row">
+			<div class="col-sm-3" th:each="juego : ${juegos}">
+				<a href="#" th:href="@{/juego/{juegoId}(juegoId=${juego.juegoId})}">
+					<div class="col-item">
+						<div class="photo">
+							<img src="http://placehold.it/350x260"
+								th:src="${#strings.isEmpty(juego.portada)} ? 'http://placehold.it/350x260' : ${juego.portada}"
+								class="img-rounded" alt="Cinque Terre" width="304" height="236" />
+						</div>
+						<div class="info">
+							<div class="row">
+								<div class="price col-md-12">
+									<h5 class="titjue"
+										th:text="${#strings.abbreviate(juego.nombre,65)}">Nombre</h5>
+									<div style="text-align: center">
+										<b class="titedi" th:text="${juego.editorial.nombre}"></b> - <b
+											class="titedi" th:text="${juego.categoria.nombre}"></b>
 									</div>
 								</div>
+								<div class="row"></div>
 							</div>
-						</a>
+						</div>
 					</div>
-				</div>
+				</a>
+			</div>
+		</div>
 	</section>
+	<article></article>
 	<footer class="page-footer font-small special-color-dark pt-4">
 		<div class="footer-copyright text-center py-3">
-					<div>
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+			</a>
+			<div class="bloque"></div>
+			<a class="btn-floating btn-sm btn-tw"> <i href="#"
+				class="fa fa-facebook"></i></a><a class="btn-floating btn-sm btn-tw">
+				<i href="#" class="fa fa-twitter"></i>
+			</a>
 		</div>
-				<p>			2020 Creative Commons Reconocimiento-SinObraDerivada 4.0
-			Internacional: <a href="https://google.es/">PlayMesa</a>		<a href="#" class="fa fa-facebook"></a>
-		<a href="#" class="fa fa-twitter"></a> </p>
+		<p style="text-align: center">
+			2020 Creative Commons Reconocimiento-SinObraDerivada 4.0
+			Internacional: <a href="https://google.es/">PlayMesa</a>
+		</p>
 		</div>
+		<div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+			This content is only shown to admin users.</div>
+		<div th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
+			This content is only shown to users.</div>
 	</footer>
-			<!-- Optional JavaScript -->
-		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-			integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-			crossorigin="anonymous"></script>
-		<script
-			src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-			integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-			crossorigin="anonymous"></script>
-		<script
-			src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-			integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-			crossorigin="anonymous"></script>
-		<script>
-		function openNav() {
-		  document.getElementById("mySidebar").style.width = "250px";
-		  document.getElementById("main").style.marginLeft = "250px";
-		}
-		
-		function closeNav() {
-		  document.getElementById("mySidebar").style.width = "0";
-		  document.getElementById("main").style.marginLeft= "0";
-		}
-		</script>
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+		integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+		integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+		crossorigin="anonymous"></script>
 </body>
 </html>
